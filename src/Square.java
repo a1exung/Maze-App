@@ -33,7 +33,7 @@ public class Square {
             case 3:
                 return "E";
             default:
-                return "There is something wrong with this square";
+                return "There is something wrong with this square (" + getRow() + ", " + getCol() + ")";
         }
     }
 }
