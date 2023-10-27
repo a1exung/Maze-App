@@ -3,6 +3,7 @@ import java.util.*;
 public class Maze {
 
     private int numRows, numCols;
+    private Square[][] squares;
     
     public Maze(){
         numRows = 0;
@@ -10,12 +11,11 @@ public class Maze {
     }
 
     public boolean loadMaze(String fname){
-        numRows = sc.nextInt();
-        num
+       
     }
 
     ArrayList<Square> getNeighbors(Square sq){
-
+        
     }
 
     public Square getStart(){}
