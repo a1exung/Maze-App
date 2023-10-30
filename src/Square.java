@@ -25,13 +25,13 @@ public class Square {
     public String toString(){
         switch (type){
             case 0:
-                return "_";
+                return "_ ";
             case 1:
-                return "#";
+                return "# ";
             case 2:
-                return "S";
+                return "S ";
             case 3:
-                return "E";
+                return "E ";
             default:
                 return "There is something wrong with this square (" + getRow() + ", " + getCol() + ")";
         }
