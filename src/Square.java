@@ -22,6 +22,11 @@ public class Square {
         return type;
     }
 
+    public void reset()
+    {
+        
+    }
+
     public String toString(){
         switch (type){
             case 0:
