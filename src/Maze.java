@@ -15,18 +15,24 @@ public class Maze {
     public boolean loadMaze(String fname) throws IOException
     {
         // Account for Errors, otherwise this works
-       Scanner sc = new Scanner(new File(fname));
-       numRows = sc.nextInt();
-       numCols = sc.nextInt();
-       maze = new Square[numRows][numCols];
-       for(int i = 0; i < numRows; i++)
-       {
-        for(int j = 0; j < numCols; j++)
-        {
-            maze[i][j] = new Square(i,j,sc.nextInt());
+       
+       try{
+            Scanner sc = new Scanner(new File(fname));
+            numRows = sc.nextInt();
+            numCols = sc.nextInt();
+            maze = new Square[numRows][numCols];
+            for(int i = 0; i < numRows; i++)
+            {
+                for(int j = 0; j < numCols; j++)
+                {
+                    maze[i][j] = new Square(i,j,sc.nextInt());
+                }
+            }
+            return true;
+        } catch (Exception e) {
+            System.out.println("File could not be read");
+            return false;
         }
-       }
-       return true;
     }
 
     ArrayList<Square> getNeighbors(Square sq)
@@ -81,9 +87,21 @@ public class Maze {
 
     public void reset()
     {
-
+        //to be coded
     }
 
-    public String toString(){}
+    public String toString()
+    {
+        StringBuilder sb = new StringBuilder();
+        for( int i=0; i < maze.length; i++ )
+        {
+            for(int j = 0; j < maze[0].length; j++)
+            {
+                sb.append(maze[i][j]);
+            }
+        }
+        String s = new String(sb);
+        return s;
+    }
 
 }
