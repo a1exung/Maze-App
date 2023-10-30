@@ -38,7 +38,7 @@ public class Maze {
     ArrayList<Square> getNeighbors(Square sq)
     {
         ArrayList<Square> neighbors = new ArrayList<>();
-        if(sq.getRow()-1 > 0 && maze[sq.getRow()-1][sq.getCol()] != null)
+        if(sq.getRow()-1 >= 0 && maze[sq.getRow()-1][sq.getCol()] != null)
         {
             neighbors.add(maze[sq.getRow()-1][sq.getCol()]);
         }
@@ -50,7 +50,7 @@ public class Maze {
         {
             neighbors.add(maze[sq.getRow()+1][sq.getCol()]);
         }
-        if(sq.getCol()-1 > 0 && maze[sq.getRow()][sq.getCol()-1] != null)
+        if(sq.getCol()-1 >= 0 && maze[sq.getRow()][sq.getCol()-1] != null)
         {
             neighbors.add(maze[sq.getRow()][sq.getCol()-1]);
         }
@@ -99,6 +99,8 @@ public class Maze {
             {
                 sb.append(maze[i][j]);
             }
+
+            sb.append("\n");
         }
         String s = new String(sb);
         return s;
