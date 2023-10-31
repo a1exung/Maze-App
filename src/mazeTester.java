@@ -6,7 +6,6 @@ public class mazeTester {
 
     public static void main(String[] args){
 
-
         try{
             System.out.println(loadMazeError());
             System.out.println(loadMazeTest());
