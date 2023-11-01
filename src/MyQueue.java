@@ -11,14 +11,22 @@ public class MyQueue implements QueueADT
 
     public void enqueue(Object item)
     {
-        Node current = first;
-        while(current.next != null)
-        {
-            current = current.next;
-        }
         Node newItem = new Node();
         newItem.data = item;
-        current.next = newItem;
+
+        if(first == null)
+        {
+            first = newItem;
+        }
+        else
+        {
+            Node current = first;
+            while(current.next != null)
+            {
+                current = current.next;
+            }
+            current.next = newItem;
+        }
     }
 
     public Object dequeue() throws NoSuchElementException
@@ -26,7 +34,7 @@ public class MyQueue implements QueueADT
         if(first != null)
         {
             Node returned = first;
-            first.next = first;
+            first = first.next;
             return returned.data;
         }
         else
