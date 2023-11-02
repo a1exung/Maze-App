@@ -9,6 +9,7 @@ public abstract class MazeSolver {
     public MazeSolver(Maze maze){
         this.maze = maze;
         path = new Stack<>();
+        path.push(maze.getStart());
     }
 
     abstract void makeEmpty();
@@ -20,11 +21,11 @@ public abstract class MazeSolver {
     abstract Square next();
 
     public boolean isSolved(){
-        return (isEmpty() || finished);
+        return finished;
     }
 
     public String getPath(){
-        if (path.empty()){
+        if (path.peek().getType() != 3){
             return "There is no solution path";
         } else {
             StringBuilder sb = new StringBuilder();
@@ -38,26 +39,48 @@ public abstract class MazeSolver {
 
     public Square step(){
         if (isEmpty()){
-            add(maze.getStart());
-            return maze.getStart();
+            finished = true;
+            return null;
+            
         }
         else {
             Square next = next();
+            while (!path.peek().equals(next.getPrevious())){
+                path.pop();
+
+            }
+            
+            path.push(next);
+
             if (next.getType() == 3){
                 finished = true;
-                return next;
+                
             }
             else {
                 ArrayList<Square> neighbors = maze.getNeighbors(next);
+                
                 for (Square s : neighbors){
-                    if (s.getType() != 1) add(s);
-                }
-            }
-        }
+                    if (s.getType() != 1) {
+                        add(s);
+                        s.setPrevious(next);
+                    }
+                }    
 
+                next.explore();
+                  
+            }
+            
+            return next;
+
+        }
     }
 
+    /**
+     * 
+     */
     public void solve(){
-
+        while (!isSolved()){
+            step();
+        }
     }
 }
