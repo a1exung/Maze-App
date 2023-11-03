@@ -25,12 +25,20 @@ public abstract class MazeSolver {
     }
 
     public String getPath(){
-        if (path.peek().getType() != 3){
+        if (isEmpty()){
             return "There is no solution path";
         } else {
+
+            Square current = maze.getFinish();
+
+            do {
+                path.push(current);
+                current = current.getPrevious();
+            } while (!current.equals(maze.getStart()));
+
             StringBuilder sb = new StringBuilder();
-            for (Square s : path){
-               sb.append("[" + s.getRow() + ", " + s.getCol() + "]\n");
+            while (!path.empty()) {
+               sb.append("[" + path.pop().getRow() + ", " + path.pop().getCol() + "]\n");
             }
             String toReturn = new String(sb);
             return toReturn;
@@ -45,12 +53,6 @@ public abstract class MazeSolver {
         }
         else {
             Square next = next();
-            while (!path.peek().equals(next.getPrevious())){
-                path.pop();
-
-            }
-            
-            path.push(next);
 
             if (next.getType() == 3){
                 finished = true;
