@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class MazeSolverStack extends MazeSolver {
     
     static MyStack worklist;
