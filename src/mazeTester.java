@@ -58,7 +58,7 @@ public class mazeTester {
     }
 
     static private ArrayList<Square> getNeighborsEdge(){
-        return m.getNeighbors(m.maze[0][1]);
+        return m.getNeighbors(m.maze[5][0]);
     }
 
     static private ArrayList<Square> getNeighborsMiddle(){

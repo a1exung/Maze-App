@@ -12,7 +12,7 @@ public class Maze {
         numCols = 0;
     }
 
-    public boolean loadMaze(String fname) throws IOException
+    public boolean loadMaze(String fname)
     {
         // Account for Errors, otherwise this works
        
@@ -35,7 +35,7 @@ public class Maze {
         }
     }
 
-    ArrayList<Square> getNeighbors(Square sq)
+    public ArrayList<Square> getNeighbors(Square sq)
     {
         ArrayList<Square> neighbors = new ArrayList<>();
         if(sq.getRow()-1 >= 0 && maze[sq.getRow()-1][sq.getCol()] != null)
@@ -54,6 +54,10 @@ public class Maze {
         {
             neighbors.add(maze[sq.getRow()][sq.getCol()-1]);
         }
+        for (Square s : neighbors){
+            System.out.println(s.getRow());
+        }
+
         return neighbors;
     }
 
@@ -87,7 +91,11 @@ public class Maze {
 
     public void reset()
     {
-        //to be coded
+        for (Square[] mazes : maze){
+            for (Square s : mazes){
+                s.reset();
+            }
+        }
     }
 
     public String toString()

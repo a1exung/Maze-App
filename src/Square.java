@@ -3,7 +3,7 @@ import java.util.*;
 public class Square {
 
     private int row, col, type;
-    private boolean explored;
+    private boolean explored, onPath, inList;
     private Square previous;
 
     public Square (int row, int col, int type){
@@ -11,6 +11,8 @@ public class Square {
         this.col = col;
         this.type = type;
         this.explored = false;
+        this.onPath = false;
+        this.inList = false;
     }
 
     public int getRow(){
@@ -27,11 +29,25 @@ public class Square {
 
     public void reset()
     {
-        
+        explored = false;
+        onPath = false;
+        inList = false;
     }
 
     public void explore(){
         explored = true;
+    }
+
+    public boolean isExplored(){
+        return explored;
+    }
+
+    public void enlist(){
+        inList = true;
+    }
+
+    public void onPath(){
+        onPath = true;
     }
 
     public void setPrevious(Square s){
@@ -49,6 +65,19 @@ public class Square {
     public String toString(){
         switch (type){
             case 0:
+
+                if (onPath){
+                    return "x ";
+                } 
+
+                if (explored){
+                    return " . ";
+                }
+
+                if  (inList){
+                    return "o ";
+                }
+
                 return "_ ";
             case 1:
                 return "# ";

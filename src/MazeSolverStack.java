@@ -21,7 +21,13 @@ public class MazeSolverStack extends MazeSolver {
     }
 
     public void add(Square sq){
-        worklist.push(sq);
+        boolean isPresent = false;
+        for (int i = 0; i < worklist.size(); i++){
+            if (worklist.elements.get(i).equals(sq)){
+                isPresent = true;
+            }
+        }
+        if (!isPresent && !sq.isExplored()) worklist.push(sq);
     }
 
     public Square next(){

@@ -23,7 +23,9 @@ public class MazeSolverQueue extends MazeSolver
 
     public void add(Square sq)
     {
-        worklist.enqueue(sq);
+        boolean isPresent = false;
+        isPresent = worklist.contains(sq);
+        if (!isPresent && !sq.isExplored()) worklist.enqueue(sq);
     }
 
     public Square next()

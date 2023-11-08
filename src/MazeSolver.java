@@ -9,7 +9,6 @@ public abstract class MazeSolver {
     public MazeSolver(Maze maze){
         this.maze = maze;
         path = new Stack<>();
-        path.push(maze.getStart());
     }
 
     abstract void makeEmpty();
@@ -33,12 +32,14 @@ public abstract class MazeSolver {
 
             do {
                 path.push(current);
+                current.onPath();
                 current = current.getPrevious();
             } while (!current.equals(maze.getStart()));
 
             StringBuilder sb = new StringBuilder();
             while (!path.empty()) {
-               sb.append("[" + path.pop().getRow() + ", " + path.pop().getCol() + "]\n");
+                Square sq = path.pop();
+                sb.append("[" + sq.getRow() + ", " + sq.getCol() + "]\n");
             }
             String toReturn = new String(sb);
             return toReturn;
@@ -56,15 +57,16 @@ public abstract class MazeSolver {
 
             if (next.getType() == 3){
                 finished = true;
-                
+                return next;
             }
             else {
                 ArrayList<Square> neighbors = maze.getNeighbors(next);
                 
                 for (Square s : neighbors){
-                    if (s.getType() != 1) {
+                    if (s.getType() == 0 || s.getType() == 3) {
                         add(s);
                         s.setPrevious(next);
+                        s.enlist();
                     }
                 }    
 

@@ -71,6 +71,18 @@ public class MyQueue implements QueueADT
         first = null;
     }
 
+    public boolean contains(Object o){
+        if (first == null) return false;
+        else {
+            Node current = first;
+            while (current == null){
+                if (current.data == o) return true;
+                current = current.next;
+            }
+        }
+        return false;
+    }
+
     static class Node
     {
         public Object data;
