@@ -4,7 +4,7 @@ public class Square {
 
     //declare instance variables
     private int row, col, type;
-    private boolean explored, onPath, inList;
+    public boolean explored, onPath, inList;
     private Square previous;
 
     /**

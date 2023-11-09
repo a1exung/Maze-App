@@ -4,7 +4,7 @@ public abstract class MazeSolver {
     
     protected static Maze maze;
     protected static Stack<Square> path;
-    protected boolean finished = false;
+    protected boolean finished = false, last = false;
     
     public MazeSolver(Maze maze){
         this.maze = maze;
@@ -24,25 +24,23 @@ public abstract class MazeSolver {
     }
 
     public String getPath(){
-        if (isEmpty()){
+        if (isEmpty() && !last){
             return "There is no solution path";
         } else {
 
             Square current = maze.getFinish();
+            String path = "[" + current.getRow() + ", " + current.getCol() + "]";
 
-            do {
-                path.push(current);
-                current.onPath();
+
+            //StringBuilder sb = new StringBuilder();
+            while (current.getPrevious() != null) {
                 current = current.getPrevious();
-            } while (!current.equals(maze.getStart()));
-
-            StringBuilder sb = new StringBuilder();
-            while (!path.empty()) {
-                Square sq = path.pop();
-                sb.append("[" + sq.getRow() + ", " + sq.getCol() + "]\n");
+                current.onPath();
+                //sb.append("[" + sq.getRow() + ", " + sq.getCol() + "]\n");
+                path = "[" + current.getRow() + ", " + current.getCol() + "] " + path;
             }
-            String toReturn = new String(sb);
-            return toReturn;
+            //String toReturn = new String(sb);
+            return "The solution path is: " + path;
         }
     }
 
@@ -57,6 +55,7 @@ public abstract class MazeSolver {
 
             if (next.getType() == 3){
                 finished = true;
+                last = true;
                 return next;
             }
             else {
@@ -65,7 +64,9 @@ public abstract class MazeSolver {
                 for (Square s : neighbors){
                     if (s.getType() == 0 || s.getType() == 3) {
                         add(s);
-                        s.setPrevious(next);
+                        if (!s.inList){
+                            s.setPrevious(next);
+                        }
                         s.enlist();
                     }
                 }    

@@ -27,7 +27,9 @@ public class MazeSolverStack extends MazeSolver {
                 isPresent = true;
             }
         }
-        if (!isPresent && !sq.isExplored()) worklist.push(sq);
+        if (!isPresent && !sq.isExplored()) {
+            worklist.push(sq);
+        }
     }
 
     public Square next(){
